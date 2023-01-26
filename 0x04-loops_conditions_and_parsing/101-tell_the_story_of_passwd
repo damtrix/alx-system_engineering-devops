@@ -14,6 +14,6 @@ do
     f6="$(echo "$line" | cut -d":" -f2)"
     f7="$(echo "$line" | cut -d":" -f5)"
     echo "The user ${f1} is part of the ${f2} gang, lives in ${f3} and ride
- ${f4}. ${f5}'s place is protected by the passcode ${f6}, more info about
- the user here: ${f7}"
+${f4}. ${f5}'s place is protected by the passcode ${f6}, more info about
+the user here: ${f7}"
 done < "$myfile"
