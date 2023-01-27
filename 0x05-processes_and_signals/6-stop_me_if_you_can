@@ -2,4 +2,4 @@
 # This script stops the 4-to_infinity_and_beyond process
 # Requirement: You cannot use kill or killall
 
-pkill pgrep -f 4-to_infinity_and_beyond
+pkill -f 4-to_infinity_and_beyond
