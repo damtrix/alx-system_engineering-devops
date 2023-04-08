@@ -11,10 +11,11 @@ global
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
+        tune.ssl.default-dh-param 2048
 
-        # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&c>
-        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM->
-        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:>
+        # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1>
+        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
         ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 
 defaults
@@ -33,18 +34,13 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend  damtrix-frontend
+frontend  damtrix-frontend-http
         bind *:80
         mode http
-        http-request set-header X- Forwarded-Proto http
+        http-request set-header X-Forwarded-Proto http
         default_backend damtrix-backend
 
-front damtrix-frontend-https
+frontend damtrix-frontend-https
         bind *:443 ssl crt /etc/haproxy/certs/www.damtrix.tech.pem
         http-request set-header X-Forwarded-Proto https
         default_backend damtrix-backend
-
-backend damtrix-backend
-        balance roundrobin
-        server 145465-web-01 54.237.31.149:80 check
-        server 145465-web-02 34.224.1.2:80 check
