@@ -13,9 +13,9 @@ if __name__ == "__main__":
     todosUrl = url + "/todos"
     response = requests.get(todosUrl)
     todos = response.json()
-    with open("{}.csv".format(employeeId), 'w') as file:
+    with open("{}.csv".format(str(employeeId)), 'w') as file:
         for todo in todos:
             if todo:
                 file.write('"{}","{}","{}","{}"\n'.format(
-                    employeeId, employeeUserName, todo.get(
+                    str(employeeId), employeeUserName, todo.get(
                         'completed'), todo.get('title')))
