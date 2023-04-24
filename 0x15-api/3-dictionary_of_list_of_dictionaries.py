@@ -12,7 +12,7 @@ if __name__ == "__main__":
     dict = {}
     for user in users:
         userId = user.get('id')
-        username = user.get('name')
+        username = user.get('username')
         userTodosUrl = usersUrl + "{}".format(userId) + "/todos/"
         response = requests.get(userTodosUrl)
         userTodos = response.json()
