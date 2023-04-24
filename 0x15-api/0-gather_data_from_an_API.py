@@ -19,7 +19,7 @@ if __name__ == "__main__":
         if todo.get('completed'):
             do_tasks.append(todo)
             no_done_tasks += 1
-    print("Employee {} is done with tasks({}/{})".format(
+    print("Employee {} is done with tasks({}/{}):".format(
         employeeName, no_done_tasks, len(todos)))
     for task in do_tasks:
         print("\t {}".format(task.get('title')))
