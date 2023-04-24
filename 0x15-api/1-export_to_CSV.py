@@ -15,6 +15,7 @@ if __name__ == "__main__":
     todos = response.json()
     with open("{}.csv".format(employeeId), 'w') as file:
         for todo in todos:
-            file.write('"{}","{}","{}","{}"\n'.format(
-                employeeId, employeeUserName, todo.get(
-                    'completed'), todo.get('title')))
+            if todo:
+                file.write('"{}","{}","{}","{}"\n'.format(
+                    employeeId, employeeUserName, todo.get(
+                        'completed'), todo.get('title')))
